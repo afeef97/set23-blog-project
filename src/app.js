@@ -6,6 +6,7 @@ import config from './config';
 import errorHandler from './middleware/errorHandler';
 import fourOhFour from './middleware/fourOhFour';
 import root from './routes/root';
+import apiRoutes from './routes/api';
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.use(morgan('tiny'))
 
 // Apply routes before error handling
 app.use('/', root)
+app.use('/api', apiRoutes)
 
 // Apply error handling last
 app.use(fourOhFour)
