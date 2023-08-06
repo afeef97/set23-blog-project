@@ -13,6 +13,8 @@ const config = {
 
     nodeEnv: process.env['NODE_ENV'] ?? 'development',
     port: process.env['PORT'] ?? 3000,
+
+    jwtSecretToken: process.env['JWT_SECRET_TOKEN'],
     
     clientOrigins: {
         'development': process.env['DEV_ORIGIN'] ?? '*',
