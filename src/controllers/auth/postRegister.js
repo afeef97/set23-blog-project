@@ -1,7 +1,8 @@
 import queryDB from "../../database/dbBlog";
 import hashPassword from "./hashPassword";
+import bcrypt from "bcryptjs";
 
-async function registerUser(req, res) {
+export async function registerUser(req, res) {
     const { username, email, password, f_name, l_name } = req.body;
     const isAdmin = req.body?.isAdmin ? true : false;
     const hashedPassword = hashPassword(password);
@@ -16,4 +17,9 @@ async function registerUser(req, res) {
     })
 }
 
-export default registerUser;
+function hashPassword(password) {
+    const salt = bcrypt.genSaltSync();
+    const hashedPassword = bcrypt.hashSync(password, salt);
+
+    return hashedPassword;
+}
