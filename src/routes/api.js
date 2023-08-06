@@ -5,6 +5,7 @@ import isAuthenticated from "../middleware/isAuthenticated";
 import createBlogPost from "../controllers/users/postCreateBlogPost";
 import isAuthor from "../middleware/isAuthor";
 import editBlogPost from "../controllers/users/putEditBlogPost";
+import deleteBlogPost from "../controllers/users/getDeleteBlogPost";
 
 const apiRoutes = Router();
 
@@ -14,7 +15,12 @@ apiRoutes.post("/login", loginUser);
 // Blog post APIs
 apiRoutes.post("/createBlogPost", isAuthenticated, createBlogPost);
 apiRoutes.put("/:slug/editBlogPost", isAuthenticated, isAuthor, editBlogPost);
-apiRoutes.put("/:slug/deleteBlogPost", isAuthenticated, isAuthor, editBlogPost);
+apiRoutes.get(
+    "/:slug/deleteBlogPost",
+    isAuthenticated,
+    isAuthor,
+    deleteBlogPost
+);
 // Comment APIs
 
 export default apiRoutes;
