@@ -3,7 +3,10 @@ import queryDB from "../../database/dbBlog";
 async function deleteBlogPost(req, res) {
     const slug = req.params.slug;
 
-    await queryDB("DELETE FROM blog_posts WHERE slug = $1", [slug])
+    await queryDB(
+        "UPDATE blog_posts SET deleted_at = CURRENT_TIMESTAMP WHERE slug = $1",
+        [slug]
+    )
         .then((resDb) => {
             return res
                 .status(200)
