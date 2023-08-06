@@ -6,22 +6,26 @@ import createBlogPost from "../controllers/users/postCreateBlogPost";
 import isAuthor from "../middleware/isAuthor";
 import editBlogPost from "../controllers/users/putEditBlogPost";
 import deleteBlogPost from "../controllers/users/getDeleteBlogPost";
+import getUsers from "../controllers/admin/getUsers";
 
 const apiRoutes = Router();
 const privateAPI = Router();
 const publicAPI = Router();
 
-apiRoutes.use(privateAPI);
-apiRoutes.use(publicAPI);
 privateAPI.use(isAuthenticated);
+apiRoutes.use(publicAPI);
+apiRoutes.use(privateAPI);
 
 // Authentication APIs
 publicAPI.post("/register", registerUser);
 publicAPI.post("/login", loginUser);
+// Administrative APIs
+privateAPI.get("/getUsers", getUsers);
 // Blog post APIs
 privateAPI.post("/createBlogPost", createBlogPost);
 privateAPI.put("/:slug/editBlogPost", isAuthor, editBlogPost);
 privateAPI.get("/:slug/deleteBlogPost", isAuthor, deleteBlogPost);
 // Comment APIs
+privateAPI.post("/:slug/createComment");
 
 export default apiRoutes;
