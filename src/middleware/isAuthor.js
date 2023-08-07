@@ -6,7 +6,10 @@ async function isAuthor(req, res, next) {
         [req.params.slug]
     );
 
-    if (blogAuthorID === req.userData.id || req.userData.isAdmin) {
+    if (
+        blogAuthorID.rows[0].author_id === req.userData.id ||
+        req.userData.isAdmin
+    ) {
         next();
     } else {
         return res.status(401).json({ message: "You are not the author" });
