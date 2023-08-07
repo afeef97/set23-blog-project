@@ -4,12 +4,6 @@ async function editBlogPost(req, res) {
     const body = req.body;
     const slug = req.params.slug;
 
-    if (Object.keys(req.body).length === 0) {
-        return res
-            .status(400)
-            .json({ error: "Bad request", message: "Nothing to edit" });
-    }
-
     const columns = [];
     const values = [];
     let paramIndex = 1;

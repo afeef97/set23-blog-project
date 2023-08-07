@@ -8,13 +8,6 @@ async function createComment(req, res) {
     ]);
     const postID = post.rows[0].id;
 
-    if (Object.keys(req.body).length === 0) {
-        return res.status(400).json({
-            error: "Bad request",
-            message: "Can not post empty comment",
-        });
-    }
-
     await queryDB(
         "INSERT INTO blog_comments (post_id, commenter_id, comment_body) VALUES ($1, $2, $3)",
         [postID, commenterID, comment]
