@@ -3,7 +3,7 @@ import queryDB from "../../database/dbBlog";
 async function getBlogPage(req, res) {
     const slug = req.params.slug;
     const comments = await queryDB(
-        "SELECT first_name, last_name, comment_body, blog_comments.created_at FROM blog_comments INNER JOIN blog_posts ON blog_comments.post_id = blog_posts.id INNER JOIN blog_users ON blog_comments.commenter_id = blog_users.id WHERE blog_posts.slug = $1 AND blog_comments.deleted_at IS NULL",
+        "SELECT blog_comments.id, first_name, last_name, comment_body, blog_comments.created_at FROM blog_comments INNER JOIN blog_posts ON blog_comments.post_id = blog_posts.id INNER JOIN blog_users ON blog_comments.commenter_id = blog_users.id WHERE blog_posts.slug = $1 AND blog_posts.deleted_at IS NULL",
         [slug]
     );
     const commentsData = comments.rows;
