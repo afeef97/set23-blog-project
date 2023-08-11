@@ -8,8 +8,11 @@ const pool = new Pool({
     user: config.nodeEnv["POSTGRES_USER"],
     password: config.nodeEnv["POSTGRES_PASSWORD"],
     ssl:
-        process.env["NODE_ENV"] === "development"
-            ? { require: true, rejectUnauthorized: false }
+        config.nodeEnv === "production"
+            ? {
+                  require: true,
+                  rejectUnauthorized: false,
+              }
             : false,
 });
 
