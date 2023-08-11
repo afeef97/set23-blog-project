@@ -2,11 +2,11 @@ import config from "../config";
 import { Pool } from "pg";
 
 const pool = new Pool({
-    host: config.nodeEnv["POSTGRES_HOST"],
-    port: config.nodeEnv["POSTGRES_PORT"],
-    database: config.nodeEnv["POSTGRES_DATABASE"],
-    user: config.nodeEnv["POSTGRES_USER"],
-    password: config.nodeEnv["POSTGRES_PASSWORD"],
+    host: config.postgres.host,
+    port: config.postgres.port,
+    database: config.postgres.database,
+    user: config.postgres.user,
+    password: config.postgres.password,
     ssl:
         config.nodeEnv === "production"
             ? {
