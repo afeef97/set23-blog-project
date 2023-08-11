@@ -7,7 +7,10 @@ const pool = new Pool({
     database: config.nodeEnv["POSTGRES_DATABASE"],
     user: config.nodeEnv["POSTGRES_USER"],
     password: config.nodeEnv["POSTGRES_PASSWORD"],
-    ssl: true,
+    ssl:
+        process.env["NODE_ENV"] === "development"
+            ? { require: true, rejectUnauthorized: false }
+            : false,
 });
 
 async function queryDB(text, params) {
