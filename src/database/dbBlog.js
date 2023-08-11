@@ -1,11 +1,12 @@
+import config from "../config";
 import { Pool } from "pg";
 
 const pool = new Pool({
-    user: "postgres",
-    host: "localhost",
-    database: "set2023-blog-project",
-    password: "284120",
-    port: 5432,
+    host: config.nodeEnv["POSTGRES_HOST"],
+    port: config.nodeEnv["POSTGRES_PORT"],
+    database: config.nodeEnv["POSTGRES_DATABASE"],
+    user: config.nodeEnv["POSTGRES_USER"],
+    password: config.nodeEnv["POSTGRES_PASSWORD"],
 });
 
 async function queryDB(text, params) {
